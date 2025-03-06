@@ -1,10 +1,22 @@
 import { Link } from "react-router-dom";
 import Inner from "../Components/Inner";
-
+import Preloader from './../Components/Preloader/index';
+import { useEffect, useState } from 'react';
 
 const Home = () => {
+  const [showPreloader, setShowPreloader] = useState(false);
+
+  useEffect(() => {
+    const hasPreloaderRun = localStorage.getItem("preloaderShown");
+
+    if (!hasPreloaderRun) {
+      setShowPreloader(true);
+      localStorage.setItem("preloaderShown", "true");
+    }
+  }, []);
     return (
     <Inner>
+      {showPreloader ? <Preloader /> : <div>Your Home Page Content</div>}
       <Link
         to="/about"
         className="mt-4 px-4 py-2 bg-black text-white rounded"
