@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import Inner from "../Components/Inner";
-import Preloader from './../Components/Preloader/index';
 const Home = () => {
     return (
     <Inner>
-      <Preloader />
       <Link
         to="/about"
         className="mt-4 px-4 py-2 bg-black text-white rounded"

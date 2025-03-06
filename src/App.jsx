@@ -4,9 +4,19 @@ import Home from './Pages/Home'
 import About from './Pages/About'
 import { AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
-
+import PreLoader from './Components/Preloader'
+import { useState } from 'react'
 
 function App() {
+  const location = useLocation()
+  const [showPreLoader, setShowPreLoader] = useState(true)
+
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      setShowPreLoader(false) // Disable pre-loader after first visit
+    }
+  }, [location.pathname])
+
 
   const { pathname } = useLocation();
 
@@ -22,13 +32,19 @@ function App() {
     return () => clearTimeout(timer);
   }, [pathname]);
 
-  
-  const location = useLocation();
   return (
     <>
       <AnimatePresence mode='wait'>
         <Routes location={location} key={location.pathname}>
-          <Route path='/' element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <>
+              {showPreLoader && <PreLoader />}
+              <Home />
+            </>
+          }
+        />
           <Route path='/about' element={<About />} />
         </Routes>
       </AnimatePresence>
