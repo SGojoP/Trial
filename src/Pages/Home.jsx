@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import Inner from "../Components/Inner";
 import Preloader from './../Components/Preloader/index';
-import { useEffect, useState } from 'react';
-
 const Home = () => {
     return (
     <Inner>
