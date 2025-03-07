@@ -2,6 +2,8 @@ import './App.css'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Home from './Pages/Home'
 import About from './Pages/About'
+import AdminDashboard from './Pages/AdminDashboard'
+import NewsLetter from './Pages/newsLetter'
 import { AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
 import PreLoader from './Components/Preloader'
@@ -40,12 +42,14 @@ function App() {
           path="/"
           element={
             <>
-              {showPreLoader && <PreLoader />}
+              {/* {showPreLoader && <PreLoader />} */}
               <Home />
             </>
           }
         />
           <Route path='/about' element={<About />} />
+          <Route path='/newsletter' element={<NewsLetter />} />
+          <Route path='/admin' element={<AdminDashboard />} />
         </Routes>
       </AnimatePresence>
     </>
