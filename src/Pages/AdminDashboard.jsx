@@ -101,7 +101,7 @@ export default function AdminDashboard() {
     const [files, setFiles] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/subscribers/stats")
+        axios.get("https://trial-q37f.onrender.com/api/subscribers/stats")
             .then((res) => setStats(res.data))
             .catch(err => console.error("API Error:", err));
     }, []);
@@ -115,7 +115,7 @@ export default function AdminDashboard() {
         files.forEach(file => formData.append("file", file));
         
         try {
-            await axios.post("http://localhost:5000/api/notifications/send-notification", formData, {
+            await axios.post("https://trial-q37f.onrender.com/api/notifications/send-notification", formData, {
                 headers: { "Content-Type": "multipart/form-data" }
             });
             alert("✅ Notification sent successfully!");
