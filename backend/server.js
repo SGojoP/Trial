@@ -15,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+
 app.use("/api/subscribers", subscriberRoutes);
 app.use("/api", unsubscribeRoutes);
 app.use("/api/notifications", notificationRoutes );

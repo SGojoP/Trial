@@ -1,6 +1,8 @@
 import express from "express";
 import Subscriber from "../models/Subscriber.js";
+import dotenv from "dotenv";
 
+dotenv.config();
 const router = express.Router();
 
 // Get total subscribers and state-wise distribution

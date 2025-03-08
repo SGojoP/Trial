@@ -21,12 +21,19 @@ export default function AdminDashboard() {
     const sendNotification = async () => {
         if (!notification.state || !notification.message) return alert("Fill all fields");
 
-        const res = await axios.post("http://localhost:5000/api/notifications/send-notification", {
-            states: [notification.state],
-            message: notification.message
-        });
-
-        alert(res.data.message);
+        try {
+            const res = await axios.post("http://localhost:5000/api/notifications/send-notification", {
+                states: [notification.state],
+                message: notification.message
+            });
+            alert("✅ Notification sent successfully!");
+            setNotification({ state: "", message: "" });
+        } 
+        
+        catch (error) {
+            alert("❌ Failed to send notification. Try again.");
+            console.error("Error sending notification:", error);
+        }
     };
 
     return (
