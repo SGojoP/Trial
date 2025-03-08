@@ -98,30 +98,6 @@ dotenv.config();
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
-// Function to send emails
-// const sendMail = async (to, subject, text, file) => {
-//     let transporter = nodemailer.createTransport({
-//         service: "gmail",
-//         auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS }
-//     });
-
-//     let mailOptions = {
-//         from: process.env.EMAIL_USER,
-//         to,
-//         subject,
-//         text,
-//     };
-
-//     if (file) {
-//         mailOptions.attachments = [{
-//             filename: file.originalname,
-//             content: file.buffer
-//         }];
-//     }
-
-//     await transporter.sendMail(mailOptions);
-// };
-
 const sendMail = async (to, subject, text, files) => {
     let transporter = nodemailer.createTransport({
         service: "gmail",
