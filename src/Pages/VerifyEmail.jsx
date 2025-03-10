@@ -32,7 +32,7 @@ const VerifyEmail = () => {
         const verifyEmail = async () => {
             try {
                 console.log("Verifying email...");  // Debugging
-                const response = await fetch(`https://sgojop.github.io/api/verify-email/${token}`);
+                const response = await fetch(`https://trial-q37f.onrender.com/api/verify-email/${token}`);
                 const data = await response.json();
     
                 if (isMounted) {
