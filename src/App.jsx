@@ -52,7 +52,9 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/newsletter' element={<NewsLetter />} />
           <Route path='/admin' element={<AdminDashboard />} />
-          <Route path="/verify-email/:token" element={<VerifyEmail/>} />
+          {/* <Route path="/verify-email/:token" element={<VerifyEmail/>} /> */}
+          <Route path="/verify-email/:token" element={<VerifyEmail />} />
+
         </Routes>
       </AnimatePresence>
     </>
