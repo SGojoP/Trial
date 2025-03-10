@@ -142,7 +142,7 @@ const SubscriptionForm = () => {
           placeholder="Select states"
           className="text-black"
         />
-        <Button type="submit" className="w-full" disabled={loading || !contact.trim()}>
+        <Button type="submit" className="w-full cursor-pointer" disabled={loading || !contact.trim()}>
           {loading ? "Subscribing..." : "Subscribe"}
         </Button>
       </form>

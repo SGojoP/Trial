@@ -2,38 +2,48 @@
 // import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 // import { Card, CardContent } from "@/components/ui/card";
 // import { Button } from "@/components/ui/button";
+// import { X } from "lucide-react";
 // import axios from "axios";
 
 // export default function AdminDashboard() {
 //     const [stats, setStats] = useState({ totalSubscribers: 0, stateStats: [] });
 //     const [notification, setNotification] = useState({ state: "", message: "" });
+//     const [files, setFiles] = useState([]);
+    
 
 //     useEffect(() => {
-//         axios.get("http://localhost:5000/api/subscribers/stats")
-//             .then((res) => {
-//                 console.log("API Response:", res.data);
-//                 setStats(res.data);
-//             })
+//         axios.get("https://trial-q37f.onrender.com/api/admin/subscribers/stats")
+//             .then((res) => setStats(res.data))
 //             .catch(err => console.error("API Error:", err));
 //     }, []);
-    
 
 //     const sendNotification = async () => {
 //         if (!notification.state || !notification.message) return alert("Fill all fields");
-
+        
+//         const formData = new FormData();
+//         formData.append("states", notification.state);
+//         formData.append("message", notification.message);
+//         files.forEach(file => formData.append("file", file));
+        
 //         try {
-//             const res = await axios.post("http://localhost:5000/api/notifications/send-notification", {
-//                 states: [notification.state],
-//                 message: notification.message
+//             await axios.post("https://trial-q37f.onrender.com/api/notifications/send-notification", formData, {
+//                 headers: { "Content-Type": "multipart/form-data" }
 //             });
 //             alert("✅ Notification sent successfully!");
 //             setNotification({ state: "", message: "" });
-//         } 
-        
-//         catch (error) {
+//             setFiles([]);
+//         } catch (error) {
 //             alert("❌ Failed to send notification. Try again.");
 //             console.error("Error sending notification:", error);
 //         }
+//     };
+
+//     const handleFileChange = (event) => {
+//         setFiles([...files, ...event.target.files]);
+//     };
+
+//     const removeFile = (index) => {
+//         setFiles(files.filter((_, i) => i !== index));
 //     };
 
 //     return (
@@ -59,7 +69,6 @@
 //                             <p className="text-center">No data available</p>
 //                         )}
 //                     </ResponsiveContainer>
-
 //                 </CardContent>
 //             </Card>
 
@@ -69,17 +78,40 @@
 //                     <select
 //                         className="w-full p-2 border rounded"
 //                         onChange={(e) => setNotification({ ...notification, state: e.target.value })}
+//                         value={notification.state}
 //                     >
 //                         <option value="">Select State</option>
 //                         {stats.stateStats.map((s) => (
 //                             <option key={s.state} value={s.state}>{s.state}</option>
 //                         ))}
 //                     </select>
+                    
+//                     {/* File Preview */}
+//                     {files.length > 0 && (
+//                         <div className="space-y-2">
+//                             {files.map((file, index) => (
+//                                 <div key={index} className="flex items-center justify-between p-2 bg-gray-100 rounded">
+//                                     <span>{file.name}</span>
+//                                     <button onClick={() => removeFile(index)} className="text-red-500">
+//                                         <X size={16} />
+//                                     </button>
+//                                 </div>
+//                             ))}
+//                         </div>
+//                     )}
+                    
 //                     <textarea
 //                         className="w-full p-2 border rounded"
 //                         placeholder="Enter message"
+//                         value={notification.message}
 //                         onChange={(e) => setNotification({ ...notification, message: e.target.value })}
 //                     />
+                    
+//                     <input type="file" multiple className="hidden" id="fileInput" onChange={handleFileChange} />
+//                     <label htmlFor="fileInput" className="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded text-center w-full block">
+//                         + Add Files
+//                     </label>
+                    
 //                     <Button onClick={sendNotification} className="w-full">Send Notification</Button>
 //                 </CardContent>
 //             </Card>
@@ -99,21 +131,24 @@ export default function AdminDashboard() {
     const [stats, setStats] = useState({ totalSubscribers: 0, stateStats: [] });
     const [notification, setNotification] = useState({ state: "", message: "" });
     const [files, setFiles] = useState([]);
+    const [loading, setLoading] = useState(false); // Added loading state
 
     useEffect(() => {
-        axios.get("https://trial-q37f.onrender.com/api/subscribers/stats")
+        axios.get("https://trial-q37f.onrender.com/api/admin/subscribers/stats")
             .then((res) => setStats(res.data))
             .catch(err => console.error("API Error:", err));
     }, []);
 
     const sendNotification = async () => {
         if (!notification.state || !notification.message) return alert("Fill all fields");
-        
+
+        setLoading(true); // Disable button
+
         const formData = new FormData();
         formData.append("states", notification.state);
         formData.append("message", notification.message);
         files.forEach(file => formData.append("file", file));
-        
+
         try {
             await axios.post("https://trial-q37f.onrender.com/api/notifications/send-notification", formData, {
                 headers: { "Content-Type": "multipart/form-data" }
@@ -125,6 +160,8 @@ export default function AdminDashboard() {
             alert("❌ Failed to send notification. Try again.");
             console.error("Error sending notification:", error);
         }
+
+        setLoading(false); // Re-enable button
     };
 
     const handleFileChange = (event) => {
@@ -201,7 +238,9 @@ export default function AdminDashboard() {
                         + Add Files
                     </label>
                     
-                    <Button onClick={sendNotification} className="w-full">Send Notification</Button>
+                    <Button onClick={sendNotification} className="w-full cursor-pointer" disabled={loading}>
+                        {loading ? "Sending..." : "Send Notification"}
+                    </Button>
                 </CardContent>
             </Card>
         </div>

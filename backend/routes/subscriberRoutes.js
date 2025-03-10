@@ -43,7 +43,6 @@ import dotenv from "dotenv";
 import Subscriber from "../models/Subscriber.js"; 
 
 dotenv.config();
-console.log(process.env.FRONTEND_URL);
 const router = express.Router();
 
 // Nodemailer transporter
