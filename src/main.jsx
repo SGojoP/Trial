@@ -7,7 +7,7 @@ import newsLetter from './Pages/newsLetter.jsx'
 
 createRoot(document.getElementById('root')).render(
   <>
-    <BrowserRouter basename="/Trial/">
+    <BrowserRouter basename='/Trial'>
     <App />
     </BrowserRouter>
   </>,
