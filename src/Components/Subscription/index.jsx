@@ -73,10 +73,11 @@ import axios from "axios";
 
 const states = [
   { value: "rajasthan", label: "Rajasthan" },
-  { value: "maharashtra", label: "Maharashtra" },
-  { value: "karnataka", label: "Karnataka" },
-  { value: "tamilnadu", label: "Tamil Nadu" },
-  { value: "delhi", label: "Delhi" },
+  { value: "gujrat", label: "Gujrat" },
+  { value: "himachal", label: "Himachal" },
+  { value: " Puducherry", label: " Puducherry" },
+  { value: "chandigarh", label: "Chandigarh" },
+  { value: "punjab", label: "Punjab" },
 ];
 
 const SubscriptionForm = () => {
