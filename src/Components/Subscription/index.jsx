@@ -104,13 +104,13 @@ const SubscriptionForm = () => {
 
     const subscriberData = {
       emailOrPhone: contact,
-      states: selectedStates.map((s) => s.label),
+      states: selectedStates.map((s) => s.value),
     };
 
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/subscribers/subscribe",
+        "https://trial-q37f.onrender.com/api/subscribe",
         subscriberData
       );
       alert(response.data.message);
@@ -118,7 +118,7 @@ const SubscriptionForm = () => {
       setSelectedStates([]);
     } catch (error) {
       console.error("Subscription failed:", error);
-      alert("Failed to subscribe. Please try again.");
+      alert(error.response?.data?.error || "Failed to subscribe. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -142,7 +142,7 @@ const SubscriptionForm = () => {
           placeholder="Select states"
           className="text-black"
         />
-        <Button type="submit" className="w-full" disabled={loading}>
+        <Button type="submit" className="w-full" disabled={loading || !contact.trim()}>
           {loading ? "Subscribing..." : "Subscribe"}
         </Button>
       </form>

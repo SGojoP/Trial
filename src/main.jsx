@@ -6,9 +6,9 @@ import { BrowserRouter, Link } from 'react-router-dom'
 import newsLetter from './Pages/newsLetter.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <>
     <BrowserRouter basename="/Trial/">
     <App />
     </BrowserRouter>
-  </StrictMode>,
+  </>,
 )

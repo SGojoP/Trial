@@ -8,6 +8,7 @@ import { AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
 // import PreLoader from './Components/Preloader'
 import { useState } from 'react'
+import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
   const location = useLocation()
@@ -51,6 +52,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/newsletter' element={<NewsLetter />} />
           <Route path='/admin' element={<AdminDashboard />} />
+          <Route path="/verify-email/:token" element={<VerifyEmail/>} />
         </Routes>
       </AnimatePresence>
     </>
