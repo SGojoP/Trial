@@ -43,8 +43,7 @@ import dotenv from "dotenv";
 import Subscriber from "../models/Subscriber.js"; 
 
 dotenv.config();
-console.log("Frontend URL:", process.env.FRONTEND_URI);
-
+console.log(process.env.FRONTEND_URL);
 const router = express.Router();
 
 // Nodemailer transporter
@@ -78,9 +77,7 @@ router.post("/", async (req, res) => {
 
             // Email subscription requires verification
             const token = crypto.randomBytes(32).toString("hex");
-            // const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${token}`;
-            const frontendUrl = process.env.FRONTEND_URI || "http://localhost:5173/Trial";
-            const verificationLink = `${frontendUrl}/verify-email/${token}`;
+            const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${token}`;
 
 
 
