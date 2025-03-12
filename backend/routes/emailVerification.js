@@ -30,8 +30,19 @@ router.get("/:token", async (req, res) => {
         await transporter.sendMail({
             from: process.env.EMAIL_USER,
             to: pendingSub.email,
-            subject: "Subscription Confirmation",
-            text: "Congratulations you have been successfully subscribed to our notification service. \n For every notification each of your credits will be used, we provide 4 credits for free. That mean you will get next 4 email notifications for free, in order to get all notification for tenure 2025-26 you have to pay a very nominal fee of ₹99. \n Thank you for subscribing to our service. \n \n \n \n Terms a conditions: \n 1. You will get 4 free notifications. \n 2. once exhausted all 4 nominal fee is charged as a subscription fee for 1 year. \n 3. No credits are used for promotions mail, only notifications use credits \n \n \n Thank you 🙂 \n Team ENROLLIX"
+            subject: `Subscription Confirmation",
+            text: "Congratulations you have been successfully subscribed to our notification service.
+            For every notification each of your credits will be used, we provide 4 credits for free. That mean you will get next 4 email notifications for free, in order to get all notification for tenure 2025-26 you have to pay a very nominal fee of ₹99.
+            Thank you for subscribing to our service.
+
+
+            Terms a conditions:
+            1. You will get 4 free notifications.
+            2. once exhausted all 4 nominal fee is charged as a subscription fee for 1 year.
+            3. No credits are used for promotions mail, only notifications use credits
+            
+            Thank you 🙂 
+            Team ENROLLIX1`
         });
 
         await PendingSubscriber.deleteOne({ _id: pendingSub._id });
