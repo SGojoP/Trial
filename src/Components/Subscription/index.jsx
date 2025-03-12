@@ -70,6 +70,7 @@ import Select from "react-select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import { set } from "mongoose";
 
 const states = [
   { value: "rajasthan", label: "Rajasthan" },
@@ -83,6 +84,7 @@ const states = [
 const SubscriptionForm = () => {
   const [contact, setContact] = useState("");
   const [selectedStates, setSelectedStates] = useState([]);
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
 
   const isValidContact = (value) => {
@@ -106,6 +108,7 @@ const SubscriptionForm = () => {
     const subscriberData = {
       emailOrPhone: contact,
       states: selectedStates.map((s) => s.value),
+      name,
     };
 
     setLoading(true);
@@ -117,6 +120,7 @@ const SubscriptionForm = () => {
       alert(response.data.message);
       setContact("");
       setSelectedStates([]);
+      setName("");
     } catch (error) {
       console.error("Subscription failed:", error);
       alert(error.response?.data?.error || "Failed to subscribe. Please try again.");
@@ -134,6 +138,12 @@ const SubscriptionForm = () => {
           placeholder="Enter your phone number or email"
           value={contact}
           onChange={(e) => setContact(e.target.value)}
+        />
+        <Input
+          type="text"
+          placeholder="Enter your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <Select
           options={states}

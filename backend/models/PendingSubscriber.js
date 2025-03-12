@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const PendingSubscriberSchema = new mongoose.Schema({
+    name: {type: String, required: true},
     email: { type: String, required: true, unique: true },
     states: { type: [String], required: true },
     token: { type: String, required: true, unique: true },

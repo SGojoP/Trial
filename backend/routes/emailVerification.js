@@ -24,7 +24,7 @@ router.get("/:token", async (req, res) => {
         }
 
         // Move to main subscribers collection
-        await Subscriber.create({ emailOrPhone: pendingSub.email, states: pendingSub.states });
+        await Subscriber.create({ emailOrPhone: pendingSub.email, states: pendingSub.states, name: pendingSub.name });
         
         // Remove from pending subscribers
         await transporter.sendMail({

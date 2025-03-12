@@ -53,7 +53,7 @@ const transporter = nodemailer.createTransport({
 
 // Subscription route
 router.post("/", async (req, res) => {
-    const { emailOrPhone, states } = req.body;
+    const { emailOrPhone, states, name} = req.body;
 
     if (!emailOrPhone || !states?.length) {
         return res.status(400).json({ error: "Email/Phone and States are required." });
@@ -83,7 +83,7 @@ router.post("/", async (req, res) => {
 
 
             // Store pending subscriber
-            await PendingSubscriber.create({ email: emailOrPhone, states, token });
+            await PendingSubscriber.create({ email: emailOrPhone, states, token, name });
 
             // Send verification email
             await transporter.sendMail({
