@@ -70,7 +70,6 @@ import Select from "react-select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { set } from "mongoose";
 
 const states = [
   { value: "rajasthan", label: "Rajasthan" },
